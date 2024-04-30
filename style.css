@@ -45,12 +45,30 @@ h1 {
     letter-spacing: 2px;
 }
 
+.game > span {
+    color: rgb(255, 128, 128);
+}
+
 .tile {
+    display: flex;
     border: 1px solid orangered;
     background-color: rgba(23, 23, 23, 0.7);
     width: 150px;
     height: 150px;
     color: transparent;
+    justify-content: center;
+}
+
+.tile:hover {
+    cursor: pointer;
+}
+
+.tile > div {
+    color: white;
+    font-size: 4em;
+    margin: 0;
+    margin-top: 30px;
+   
 }
 
 
@@ -92,6 +110,11 @@ h1 {
 
 }
 
+button:hover {
+    cursor: pointer;
+    background-color: rgb(200, 53, 0);
+}
+
 .buttons {
     display: flex;
     justify-content: center;
@@ -125,7 +148,14 @@ h1 {
     height: auto;
 }
 
+.winner-popup > img:hover {
+    cursor: pointer;
+}
+
 .winner-popup > span {
     font-size: 2em;
+    
 }
+
+
 
