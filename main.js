@@ -18,8 +18,8 @@
 
     let playerSelection = '';
 
-    const allEqualX = arr => arr.every(val => val === arr[0] && val === 'x');
-    const allEqualO = arr => arr.every(val => val === arr[0] && val === 'o');
+    const allEqualX = arr => arr.every(val => val === 'x');
+    const allEqualO = arr => arr.every(val => val === 'o');
     
     closeButton.addEventListener('click', clickReload)
    
