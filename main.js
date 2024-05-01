@@ -11,18 +11,18 @@
     const winMessage = document.querySelector('.win-message')
     const closeButton = document.querySelector('.close-button')
 
-    closeButton.addEventListener('click', clickReload)
-
-
+    
     let board = [1, 2, 3, 
                  4, 5, 6, 
                  7, 8, 9];
 
+    let playerSelection = '';
+
     const allEqualX = arr => arr.every(val => val === arr[0] && val === 'x');
     const allEqualO = arr => arr.every(val => val === arr[0] && val === 'o');
     
-    let playerSelection = '';
-
+    closeButton.addEventListener('click', clickReload)
+   
     xButton.addEventListener('click', () =>{
         playerSelection = 'x'
         errorMessage.innerHTML = ''
@@ -37,11 +37,9 @@
     
     
     tiles.forEach((tile) => {
-        tile.addEventListener('click', () => {
+       const addSelection = () => {
             if (playerSelection == 'x' || playerSelection == 'o') {
 
-                
-                
                 let spot = tile.innerText;
             
             if (board[spot] !== 'x' && board[spot] !== 'o') {
@@ -59,7 +57,7 @@
                 
                 console.log(playerSelection)
                 console.log(board)
-
+                tile.removeEventListener('click', addSelection)
             }
                 if (allEqualX([board[0], board[1], board[2]]) ||
                     allEqualX([board[3], board[4], board[5]]) ||
@@ -98,7 +96,8 @@
                 gameDiv.prepend(errorMessage)
             }
             
-    })
+    }
+    tile.addEventListener('click', addSelection)
     })
 
   
@@ -117,43 +116,11 @@ function changePlayer(playerSelection) {
 
 function addToDom (checkSpot, weapon){
     
-    const tile0 = document.querySelector('.tile-div0')
-    const tile1 = document.querySelector('.tile-div1')
-    const tile2 = document.querySelector('.tile-div2')
-    const tile3 = document.querySelector('.tile-div3')
-    const tile4 = document.querySelector('.tile-div4')
-    const tile5 = document.querySelector('.tile-div5')
-    const tile6 = document.querySelector('.tile-div6')
-    const tile7 = document.querySelector('.tile-div7')
-    const tile8 = document.querySelector('.tile-div8')
-
-    if (checkSpot == 0) {
-        tile0.appendChild(weapon)
+    if (checkSpot >= 0 && checkSpot <=8) {
+        const tile = document.querySelector(`.tile-div${checkSpot}`)
+        tile.appendChild(weapon);
     }
-    if (checkSpot == 1) {
-        tile1.appendChild(weapon)
-    }
-    if (checkSpot == 2) {
-        tile2.appendChild(weapon)
-    }
-    if (checkSpot == 3) {
-        tile3.appendChild(weapon)
-    }
-    if (checkSpot == 4) {
-        tile4.appendChild(weapon)
-    }
-    if (checkSpot == 5) {
-        tile5.appendChild(weapon)
-    }
-    if (checkSpot == 6) {
-        tile6.appendChild(weapon)
-    }
-    if (checkSpot == 7) {
-        tile7.appendChild(weapon)
-    }
-    if (checkSpot == 8) {
-        tile8.appendChild(weapon)
-    }
+    
 }
 
 function clickReload() {
