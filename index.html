@@ -15,58 +15,94 @@
             <div class="game-board">
                 <div class="tile" data-tiles>
                     0
-                    <div class="tile-div0"></div>
+                    <div class="tile-div0">
+                        <span class="weapon"></span>
+                    </div>
                 </div>
                 <div class="tile" data-tiles>
                     1
                     <div class="tile-div1">
-                        
+                        <span class="weapon"></span>
                     </div>
                 </div>
                 <div class="tile" data-tiles>
                     2
-                    <div class="tile-div2"></div>
+                    <div class="tile-div2">
+                        <span class="weapon"></span>
+                    </div>
                 </div>
                 <div class="tile" data-tiles>
                     3
-                    <div class="tile-div3"></div>
+                    <div class="tile-div3">
+                        <span class="weapon">
+                            <span class="weapon"></span>
+                        </span>
+                    </div>
                 </div>
                 <div class="tile" data-tiles>
                     4
-                    <div class="tile-div4"></div>
+                    <div class="tile-div4">
+                        <span class="weapon"></span>
+                    </div>
                 </div>
                 <div class="tile" data-tiles>
                     5
-                    <div class="tile-div5"></div>
+                    <div class="tile-div5">
+                        <span class="weapon"></span>
+                    </div>
                 </div>
                 <div class="tile" data-tiles>
                     6
-                    <div class="tile-div6"></div>
+                    <div class="tile-div6">
+                        <span class="weapon"></span>
+                    </div>
                 </div>
                 <div class="tile" data-tiles>
                     7
-                    <div class="tile-div7"></div>
+                    <div class="tile-div7">
+                        <span class="weapon"></span>
+                    </div>
                 </div>
                 <div class="tile" data-tiles>
                     8
-                    <div class="tile-div8"></div>
+                    <div class="tile-div8">
+                        <span class="weapon"></span>
+                    </div>
                 </div>
                 
             </div>
         </div>
-        <div class="player-selection">
-            <h3>Choose Your Weapon</h3>
-            <div class="buttons">
-                <button class="choose-x">Player X</button>
-                <button class="choose-o">Player O</button>
+        <dialog class="player-dialog">
+             <div class="player-selection">
+            <h3>Player Name</h3>
+            <div class="form-div">
+                <form method="dialog">
+                    <ul>
+                        <label for="user-1">Player X Name:</label>
+                        <input type="text" name="input-user-1" id="user-1">
+                    </ul>
+
+                    <ul>
+                        <label for="user-2">Player O Name:</label>
+                        <input type="text" name="input-user-2" id="user-2" required>
+                    </ul>
+                    
+                    <button class="submit">Submit</button>
+                </form>
             </div>
+        </dialog>
+       
         </div>
         </main>
     
-        <div class="winner-popup">
-            <img src="icon/close.svg" alt="close window" class="close-button">
-            <span class="win-message"></span>
-        </div>
+        <dialog class="winner-dialog">
+            <div class="winner-popup">
+                <img src="icon/close.svg" alt="close window" class="close-button">
+                <span class="win-message"></span>
+            </div>
+
+        </dialog>
+       
         
 </body>
 </html>

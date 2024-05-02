@@ -1,128 +1,119 @@
 (function gameBoard () {
     const tiles = document.querySelectorAll('[data-tiles]')
 
-    const xButton = document.querySelector('.choose-x')
-    const oButton = document.querySelector('.choose-o') 
+    const player1 = document.querySelector('#user-1')
+    const player2 = document.querySelector('#user-2')
 
-    const gameDiv = document.querySelector('.game')
-    const errorMessage = document.querySelector('.error-message')
-
-    const winnerPopup = document.querySelector('.winner-popup')
+    const winnerPopup = document.querySelector('.winner-dialog')
     const winMessage = document.querySelector('.win-message')
     const closeButton = document.querySelector('.close-button')
 
+    const playerDialog = document.querySelector('dialog')
+    playerDialog.showModal()
+
     
-    let board = [1, 2, 3, 
-                 4, 5, 6, 
-                 7, 8, 9];
+    let board = [];
 
-    let playerSelection = '';
+    let boardCombs = [
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8],
+        [0, 4, 8],
+        [2, 4, 6],
+    ]
 
-    const allEqualX = arr => arr.every(val => val === 'x');
-    const allEqualO = arr => arr.every(val => val === 'o');
+    const createBoard = function() {
+        for (let i = 0; i < 9; i ++) {
+        board.push(i)
+    }}
+    createBoard();
+    
+
+    const checkBoard = function() {
+        const checkTie = board.every((tile) => tile == 'x' || tile == 'o')
+    
+        for ( let index in boardCombs) {
+            
+            const [first, second, third] = boardCombs[index]
+            
+            if (!board[first] < 9 && board[first] == board[second] && board[second] == board[third]) {
+               
+                if (board[first, second, third] == 'x') {
+                    
+                    winMessage.innerHTML = `${player1.value} wins!`
+                    winnerPopup.showModal()
+        
+               }
+
+               if (board[first, second, third] == 'o') {
+                
+                    winMessage.innerHTML = `${player2.value} wins!`
+                    winnerPopup.showModal()
+
+               }
+               
+            }  else if (checkTie) {
+                console.log(board[index])
+                winMessage.innerHTML = 'You tied :('
+                winnerPopup.showModal()
+            }   
+ 
+        }
+    }
+
+     let player = 'x';
+
     
     closeButton.addEventListener('click', clickReload)
+    
    
-    xButton.addEventListener('click', () =>{
-        playerSelection = 'x'
-        errorMessage.innerHTML = ''
-        console.log(playerSelection)
-    })
-
-    oButton.addEventListener('click', () => {
-        playerSelection = 'o'
-        errorMessage.innerHTML = ''
-        console.log(playerSelection)
-    })
-    
-    
     tiles.forEach((tile) => {
        const addSelection = () => {
-            if (playerSelection == 'x' || playerSelection == 'o') {
-
-                let spot = tile.innerText;
+     
+            let spot = tile.innerText;
             
             if (board[spot] !== 'x' && board[spot] !== 'o') {
         
-                board.splice(spot, 1, `${playerSelection}`)
+                board.splice(spot, 1, `${player}`)
 
                 let weapon = document.createElement('span')
-                weapon.innerHTML = `${playerSelection}`
+                weapon.innerHTML = `${player}`
 
                 let checkSpot = spot
                 
                 addToDom(checkSpot, weapon)
+
+                checkBoard()
                 
-                playerSelection = changePlayer(playerSelection)
+                player = changePlayer(player)
                 
-                console.log(playerSelection)
-                console.log(board)
                 tile.removeEventListener('click', addSelection)
-            }
-                if (allEqualX([board[0], board[1], board[2]]) ||
-                    allEqualX([board[3], board[4], board[5]]) ||
-                    allEqualX([board[6], board[7], board[8]]) || 
-                    allEqualX([board[0], board[3], board[6]]) ||
-                    allEqualX([board[1], board[4], board[7]]) ||
-                    allEqualX([board[2], board[5], board[8]]) ||
-                    allEqualX([board[0], board[4], board[8]]) ||
-                    allEqualX([board[2], board[4], board[6]])){
-                    
-                    winMessage.innerHTML = 'X wins!'
-                    winnerPopup.style.display = 'flex'
-        
-                    return;
-                } 
-                if (allEqualO([board[0], board[1], board[2]]) ||
-                    allEqualO([board[3], board[4], board[5]]) ||
-                    allEqualO([board[6], board[7], board[8]]) || 
-                    allEqualO([board[0], board[3], board[6]]) ||
-                    allEqualO([board[1], board[4], board[7]]) ||
-                    allEqualO([board[2], board[5], board[8]]) ||
-                    allEqualO([board[0], board[4], board[8]]) ||
-                    allEqualO([board[2], board[4], board[6]])){
-                
-
-                    winMessage.innerHTML = 'O wins!'
-                    winnerPopup.style.display = 'flex'
-        
-                return;
-        
-            } 
-            } else {
-                
-                errorMessage.innerHTML = '*Choose a weapon'
-
-                gameDiv.prepend(errorMessage)
-            }
-            
-    }
-    tile.addEventListener('click', addSelection)
+            }    
+        }
+    
+        tile.addEventListener('click', addSelection)
     })
 
-  
-    console.log(board)
-    
 }())
 
-function changePlayer(playerSelection) {
-    console.log('hello', playerSelection)
-    if (playerSelection == 'x') {
+function changePlayer(player) {
+    if (player == 'x') {
         return 'o'
-    } else if (playerSelection == 'o') {
+    } else if (player == 'o') {
         return 'x'
     }
 }
 
-function addToDom (checkSpot, weapon){
-    
+function addToDom (checkSpot, weapon){  
     if (checkSpot >= 0 && checkSpot <=8) {
         const tile = document.querySelector(`.tile-div${checkSpot}`)
         tile.appendChild(weapon);
     }
-    
 }
 
-function clickReload() {
+function clickReload(winnerPopup) {
     window.location.reload();
 }
